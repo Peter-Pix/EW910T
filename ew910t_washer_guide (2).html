@@ -1,0 +1,387 @@
+
+<h2 class="sr-only">Průvodce pračkou Electrolux EW 910 T — interaktivní nastavení programu</h2>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+.ew-app{font-family:var(--font-sans);color:var(--color-text-primary)}
+.mp{background:#e8e4d8;border:1px solid #ccc8bb;border-radius:0 0 18px 18px;padding:14px 16px 18px}
+.mp-head{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #c0bcae}
+.mp-brand{font-size:13px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:#1c2433}
+.mp-model{font-size:11px;color:#6a6a60;letter-spacing:1px}
+.ctrl-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btns-col{display:flex;flex-direction:column;gap:10px;align-items:center;padding-right:12px;border-right:1px solid #c0bcae}
+.pbtn-wrap{display:flex;flex-direction:column;align-items:center;gap:4px}
+.pbtn{width:38px;height:38px;border-radius:50%;background:#f0ede5;border:1px solid #b8b4a4;cursor:pointer;transition:all 0.1s;box-shadow:0 3px 6px rgba(0,0,0,0.12),inset 0 1px 2px rgba(255,255,255,0.8)}
+.pbtn:active,.pbtn.on{transform:translateY(2px);box-shadow:0 1px 2px rgba(0,0,0,0.18),inset 0 2px 4px rgba(0,0,0,0.1);background:#d8d4c8}
+.pbtn-lbl{font-size:10px;font-weight:500;letter-spacing:0.5px;color:#3a3a30;text-align:center;line-height:1.2}
+.pwr-led{width:7px;height:7px;border-radius:50%;background:#7a3030;margin-top:1px;transition:0.2s}
+.pwr-led.on{background:#c0392b;box-shadow:0 0 6px rgba(192,57,43,0.6)}
+.knobs-row{display:flex;gap:6px;flex:1;justify-content:space-evenly;flex-wrap:wrap}
+.knob-wrap{display:flex;flex-direction:column;align-items:center;gap:3px}
+.knob-title{font-size:9px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:#6a6a60}
+.kbox{position:relative;width:150px;height:150px;display:flex;align-items:center;justify-content:center}
+.knob{width:72px;height:72px;border-radius:50%;background:#f2efe8;border:1px solid #b8b4a6;position:relative;transition:transform 0.38s cubic-bezier(0.2,0.9,0.4,1);z-index:10;box-shadow:0 4px 10px rgba(0,0,0,0.15),inset 0 1px 2px rgba(255,255,255,0.85)}
+.knob::after{content:'';position:absolute;top:9px;left:50%;transform:translateX(-50%);width:3px;height:12px;background:#1c2433;border-radius:2px;opacity:0.7}
+.vlbl{position:absolute;top:50%;left:50%;font-size:12px;font-weight:500;color:#2a2a22;cursor:pointer;z-index:20;width:28px;margin-left:-14px;margin-top:-8px;text-align:center;transition:color 0.12s;user-select:none;line-height:1}
+.vlbl:hover{color:var(--color-text-danger)}
+.vlbl.sel{color:#2d6e6a;font-weight:600}
+.start-col{padding-left:12px;border-left:1px solid #c0bcae}
+.start-btn{width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;background:#2e7d52;display:flex;align-items:center;justify-content:center;color:white;transition:all 0.15s;box-shadow:0 3px 8px rgba(46,125,82,0.35)}
+.start-btn:hover{background:#256843}
+.start-btn:active{transform:scale(0.94)}
+.start-btn.running{background:#b03020;box-shadow:0 3px 8px rgba(176,48,32,0.35)}
+.start-btn i{font-size:18px}
+.scroll-area{overflow-y:auto;max-height:460px}
+.content-nav{display:flex;gap:0;align-items:flex-start}
+.main-col{flex:1;padding:14px 12px 14px 14px;min-width:0}
+.nav-col{width:72px;flex-shrink:0;padding:14px 10px 14px 2px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0}
+.nav-btn{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:6px;padding:8px 4px;font-size:11px;font-weight:500;letter-spacing:0.3px;color:var(--color-text-secondary);cursor:pointer;text-align:center;transition:all 0.12s;line-height:1.3}
+.nav-btn:hover{background:var(--color-background-primary);color:var(--color-text-primary);border-color:var(--color-border-secondary)}
+.nav-btn.active{background:var(--color-background-primary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500}
+.view{display:none}
+.view.active{display:block}
+.strip{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 14px;margin-bottom:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.s-dot{width:8px;height:8px;border-radius:50%;background:var(--color-border-secondary);flex-shrink:0;transition:0.2s}
+.s-dot.on{background:#27ae60}
+.s-lbl{font-size:11px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--color-text-secondary)}
+.s-lbl.on{color:#27ae60}
+.s-sum{font-size:12px;color:var(--color-text-secondary)}
+.timer-card{background:#1c2433;border-radius:var(--border-radius-lg);padding:16px;margin-bottom:10px;display:none}
+.timer-card.active{display:block}
+.t-time{font-size:2.8rem;font-weight:500;color:white;letter-spacing:1px;line-height:1;font-family:var(--font-mono)}
+.t-bar{height:2px;background:rgba(255,255,255,0.15);border-radius:2px;margin-top:10px;overflow:hidden}
+.t-fill{height:100%;background:#27ae60;width:0%;border-radius:2px;transition:width 0.5s linear}
+.t-status{font-size:12px;color:rgba(255,255,255,0.5);margin-top:6px}
+.warn{background:var(--color-background-warning);border:0.5px solid var(--color-border-warning);border-radius:var(--border-radius-md);padding:10px 12px;margin-bottom:10px;font-size:13px;color:var(--color-text-warning);display:none}
+.warn.active{display:block}
+.acard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:16px;margin-bottom:10px}
+.a-lbl{font-size:10px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:6px}
+.a-title{font-size:17px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;line-height:1.3}
+.a-body{font-size:14px;line-height:1.65;color:var(--color-text-secondary)}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-top:12px}
+.dcell{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.dc-lbl{font-size:10px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;color:var(--color-text-secondary);margin-bottom:3px}
+.dc-val{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.dc-val.tl{color:#2d6e6a}
+.dc-val.am{color:#8a5e20}
+.fcard{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:18px}
+.flbl{font-size:10px;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--color-text-secondary);display:block;margin-bottom:6px}
+.fsel{width:100%;padding:9px 12px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:var(--color-background-secondary);font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary);margin-bottom:14px;cursor:pointer}
+.fsel:focus{outline:none;border-color:var(--color-border-primary)}
+.ap-btn{width:100%;padding:11px;background:var(--color-text-primary);color:var(--color-background-primary);border:none;border-radius:var(--border-radius-md);font-family:var(--font-sans);font-size:14px;font-weight:500;cursor:pointer;transition:opacity 0.12s}
+.ap-btn:hover{opacity:0.85}
+.ap-res{margin-top:12px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px;font-size:13px;line-height:1.6;color:var(--color-text-secondary);display:none}
+.ap-res.active{display:block}
+.tip-sec{margin-bottom:6px}
+.tip-tog{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);width:100%;text-align:left;padding:11px 14px;border-radius:var(--border-radius-md);cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:var(--font-sans);font-size:14px;font-weight:500;color:var(--color-text-primary);transition:background 0.1s}
+.tip-tog:hover{background:var(--color-background-secondary)}
+.tip-tog i{font-size:14px;color:var(--color-text-secondary);transition:transform 0.2s}
+.tip-tog.open i{transform:rotate(180deg)}
+.tip-body{overflow:hidden;max-height:0;transition:max-height 0.28s ease;background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-top:none;border-radius:0 0 var(--border-radius-md) var(--border-radius-md)}
+.tip-body.open{max-height:320px}
+.tip-inner{padding:10px 14px 14px;font-size:13px;line-height:1.7;color:var(--color-text-secondary);border-top:0.5px solid var(--color-border-tertiary)}
+.tip-inner p{margin-bottom:6px}
+.tip-inner strong{color:var(--color-text-primary);font-weight:500}
+.prog-tbl{width:100%;border-collapse:collapse;font-size:13px;background:var(--color-background-primary);border-radius:var(--border-radius-lg);overflow:hidden;border:0.5px solid var(--color-border-tertiary);margin-top:14px}
+.prog-tbl th{font-size:10px;font-weight:500;letter-spacing:0.8px;text-transform:uppercase;color:var(--color-text-secondary);padding:8px 12px;text-align:left;background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.prog-tbl td{padding:7px 12px;border-bottom:0.5px solid var(--color-border-tertiary);vertical-align:top;line-height:1.4;color:var(--color-text-secondary)}
+.prog-tbl tr:last-child td{border-bottom:none}
+.pid{font-size:14px;font-weight:500;color:#2d6e6a}
+.pid.am{color:#8a5e20}
+.vt{font-size:13px;font-weight:500;margin-bottom:12px;color:var(--color-text-primary)}
+</style>
+
+<div class="ew-app">
+  <div class="mp">
+    <div class="mp-head">
+      <span class="mp-brand">Electrolux</span>
+      <span class="mp-model">EW 910 T</span>
+    </div>
+    <div class="ctrl-row">
+      <div class="btns-col">
+        <div class="pbtn-wrap">
+          <div class="pbtn" id="btn-pwr" onclick="toggleBtn('pwr')"></div>
+          <div class="pbtn-lbl">I / O</div>
+          <div class="pwr-led" id="led-pwr"></div>
+        </div>
+        <div class="pbtn-wrap">
+          <div class="pbtn" id="btn-half" onclick="toggleBtn('half')"></div>
+          <div class="pbtn-lbl">½</div>
+        </div>
+        <div class="pbtn-wrap">
+          <div class="pbtn" id="btn-rinse" onclick="toggleBtn('rinse')"></div>
+          <div class="pbtn-lbl">+Mácháni</div>
+        </div>
+      </div>
+      <div class="knobs-row">
+        <div class="knob-wrap">
+          <div class="knob-title">Otáčky</div>
+          <div class="kbox"><div class="knob" id="kn-spin"></div><div id="lb-spin"></div></div>
+        </div>
+        <div class="knob-wrap">
+          <div class="knob-title">Program</div>
+          <div class="kbox"><div class="knob" id="kn-prog"></div><div id="lb-prog"></div></div>
+        </div>
+        <div class="knob-wrap">
+          <div class="knob-title">Teplota</div>
+          <div class="kbox"><div class="knob" id="kn-temp"></div><div id="lb-temp"></div></div>
+        </div>
+      </div>
+      <div class="start-col">
+        <button class="start-btn" id="startBtn" onclick="toggleStart()" aria-label="Spustit / zastavit praní">
+          <i class="ti ti-player-play" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-area">
+    <div class="content-nav">
+      <div class="main-col">
+
+        <div class="view active" id="v-info">
+          <div class="strip">
+            <div class="s-dot" id="s-dot"></div>
+            <span class="s-lbl" id="s-lbl">Vypnuto</span>
+            <span class="s-sum" id="s-sum">— zapni tlačítkem I/O</span>
+          </div>
+          <div class="timer-card" id="timer-card">
+            <div class="t-time" id="t-time">--:--</div>
+            <div class="t-status" id="t-status">Připravuji...</div>
+            <div class="t-bar"><div class="t-fill" id="t-fill"></div></div>
+          </div>
+          <div class="warn" id="warn-box"></div>
+          <div class="acard">
+            <div class="a-lbl">Aktuální nastavení</div>
+            <div class="a-title" id="a-title">Pračka je vypnuta</div>
+            <div class="a-body" id="a-body">Stiskni I/O pro zapnutí. Pak klikej na hodnoty kolem budíků pro otočení, nebo použij Autopilota.</div>
+            <div class="dgrid" id="dgrid" style="display:none">
+              <div class="dcell"><div class="dc-lbl">Program</div><div class="dc-val tl" id="d-prog">—</div></div>
+              <div class="dcell"><div class="dc-lbl">Teplota</div><div class="dc-val am" id="d-temp">—</div></div>
+              <div class="dcell"><div class="dc-lbl">Ždímání</div><div class="dc-val" id="d-spin">—</div></div>
+              <div class="dcell"><div class="dc-lbl">Odh. čas</div><div class="dc-val" id="d-time">—</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="view" id="v-auto">
+          <div class="vt">Rychlé nastavení</div>
+          <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:14px;line-height:1.6">Řekni mi co máš v koši — nastavím budíky za tebe.</div>
+          <div class="fcard">
+            <label class="flbl">Barva prádla</label>
+            <select class="fsel" id="sel-color">
+              <option value="mix">Barevné / mix</option>
+              <option value="dark">Tmavé a černé</option>
+              <option value="white">Čistě bílé</option>
+            </select>
+            <label class="flbl">Typ prádla</label>
+            <select class="fsel" id="sel-type">
+              <option value="normal">Trička, spodní prádlo, ponožky</option>
+              <option value="heavy">Mikiny, džíny</option>
+              <option value="linen">Ručníky a povlečení</option>
+              <option value="wool">Svetry, vlna, choulostivé</option>
+              <option value="shoes">Tenisky a boty</option>
+              <option value="dirty">Montérky, extrémně špinavé</option>
+            </select>
+            <button class="ap-btn" onclick="runAuto()">Nastavit pračku</button>
+            <div class="ap-res" id="ap-res"></div>
+          </div>
+        </div>
+
+        <div class="view" id="v-tips">
+          <div class="vt">Pravidla praní</div>
+          <div class="tip-sec">
+            <button class="tip-tog" onclick="togTip(this,'tc-kapsy')">Kapsy jsou zrádné <i class="ti ti-chevron-down" aria-hidden="true"></i></button>
+            <div class="tip-body" id="tc-kapsy"><div class="tip-inner"><p>Vždy zkontroluj před praním. Jeden zapomenutý papírový kapesník v černém prádle vytvoří bílý sníh, který nejde vyprát. Zásobník odteče, ale vlákna z kapesníku zůstanou.</p></div></div>
+          </div>
+          <div class="tip-sec">
+            <button class="tip-tog" onclick="togTip(this,'tc-boty')">Boty neper samotné <i class="ti ti-chevron-down" aria-hidden="true"></i></button>
+            <div class="tip-body" id="tc-boty"><div class="tip-inner"><p>K teniskám vždy přihoď starý ručník nebo deku. Bez toho se buben při ždímání nevyváží, mlátí a ničí ložiska. <strong>Program J, studená nebo max 30 °C, otáčky 450.</strong></p></div></div>
+          </div>
+          <div class="tip-sec">
+            <button class="tip-tog" onclick="togTip(this,'tc-avivaz')">S aviváží opatrně <i class="ti ti-chevron-down" aria-hidden="true"></i></button>
+            <div class="tip-body" id="tc-avivaz"><div class="tip-inner"><p>Aviváž patří jen do třetího šuplíku (s kytičkou). <strong>Nikdy</strong> ji nedávej na ručníky — přestanou sát vodu. Ani na sportovní oblečení — ucpe vlákna a pak smrdí.</p></div></div>
+          </div>
+          <div class="tip-sec">
+            <button class="tip-tog" onclick="togTip(this,'tc-napl')">Nepřeplňuj buben <i class="ti ti-chevron-down" aria-hidden="true"></i></button>
+            <div class="tip-body" id="tc-napl"><div class="tip-inner"><p>Nahoře musí zůstat volné místo — dlaň nastojato. Přeplněný buben prádlo nevypere, jen ho namočí a zmačká. Na malé množství zapni tlačítko ½.</p></div></div>
+          </div>
+          <div class="tip-sec">
+            <button class="tip-tog" onclick="togTip(this,'tc-po')">Po doprání <i class="ti ti-chevron-down" aria-hidden="true"></i></button>
+            <div class="tip-body" id="tc-po"><div class="tip-inner"><p>Nech dvířka a zásuvku na prášek pootevřené. Jinak pračka zasmrádne plísní, která pak přechází na prádlo.</p></div></div>
+          </div>
+          <table class="prog-tbl">
+            <thead><tr><th>Prog.</th><th>Co to je</th><th>Teplota</th><th>Čas</th></tr></thead>
+            <tbody>
+              <tr><td class="pid">A</td><td>Těžké + předpírka</td><td>60–90 °C</td><td>~2:15 h</td></tr>
+              <tr><td class="pid">B</td><td>Bavlna — dlouhé</td><td>60–90 °C</td><td>~1:45 h</td></tr>
+              <tr><td class="pid">C</td><td>Univerzální</td><td>40–60 °C</td><td>~1:15 h</td></tr>
+              <tr><td class="pid">D</td><td>Rychlé</td><td>30–40 °C</td><td>~50 min</td></tr>
+              <tr><td class="pid">F / L</td><td>Jen máchání</td><td>—</td><td>~20 min</td></tr>
+              <tr><td class="pid">G</td><td>Ždímání — odolné</td><td>—</td><td>~10 min</td></tr>
+              <tr><td class="pid am">H</td><td>Syntetika, sport</td><td>40–60 °C</td><td>~1:10 h</td></tr>
+              <tr><td class="pid am">J</td><td>Jemné / boty</td><td>studená–40 °C</td><td>~55 min</td></tr>
+              <tr><td class="pid am">K</td><td>Vlna, svetry</td><td>studená–30 °C</td><td>~45 min</td></tr>
+              <tr><td class="pid am">M</td><td>Krátké ždímání</td><td>—</td><td>~5 min</td></tr>
+              <tr><td class="pid am">N / P</td><td>Vypouštění vody</td><td>—</td><td>~3 min</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <div class="nav-col">
+        <button class="nav-btn active" id="nb-info" onclick="switchView('info')">Info</button>
+        <button class="nav-btn" id="nb-auto" onclick="switchView('auto')">Auto-<br>pilot</button>
+        <button class="nav-btn" id="nb-tips" onclick="switchView('tips')">Tipy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const R=58;
+const spinD=[{v:350,d:-140},{v:450,d:-110},{v:550,d:-80},{v:650,d:-45},{v:750,d:0},{v:850,d:40},{v:900,d:80}];
+const progD=[{v:'A',d:-160},{v:'B',d:-130},{v:'C',d:-100},{v:'D',d:-70},{v:'F',d:-40},{v:'G',d:-15},{v:'H',d:15},{v:'J',d:40},{v:'K',d:70},{v:'L',d:100},{v:'M',d:125},{v:'N',d:150},{v:'P',d:175}];
+const tempD=[{v:'cold',lbl:'ST',d:-130},{v:30,d:-90},{v:40,d:-60},{v:50,d:-30},{v:60,d:0},{v:70,d:30},{v:80,d:60},{v:90,d:90}];
+const PINFO={
+  A:{n:'Těžké praní s předpírkou',t:'Montérky a extrémně špinavé věci. Pračka nejdřív nahrubo vypere a vypustí vodu, pak teprve pere normálně. Nejdůkladnější program.',min:135},
+  B:{n:'Bavlna — dlouhé praní',t:'Ručníky, povlečení, prostěradla. Pomalé a důkladné praní při vyšší teplotě.',min:105},
+  C:{n:'Univerzální program',t:'Nejběžnější volba. Trička, spodní prádlo, ponožky. 40 °C vypere pot a mikroby bez ničení barev.',min:75},
+  D:{n:'Rychlé praní',t:'Věci, co nejsou silně špinavé, ale chceš je proprát. Šetří čas i energii.',min:50},
+  F:{n:'Jen máchání',t:'Pračka napustí vodu, protočí a vyplaví zbytky prášku nebo aviváže. Nic nepere.',min:20},
+  G:{n:'Ždímání — odolné',t:'Vyždíme mokré prádlo bez praní. Pro odolné tkaniny snášející plné otáčky.',min:10},
+  H:{n:'Syntetika',t:'Sportovní trička, legíny, polyester. Buben se točí šetrněji, vlákna se méně mačkají.',min:70},
+  J:{n:'Jemné prádlo a boty',t:'Boty se perou tady. Vždy přidej ručník, teplota studená nebo 30 °C, otáčky max 450.',min:55},
+  K:{n:'Vlna a svetry',t:'Buben se jen líně převaluje. Max 30 °C nebo studená — jinak se svetr srazí.',min:45},
+  L:{n:'Máchání (jemné)',t:'Šetrné máchání po ručním předpraní nebo pro citlivé tkaniny.',min:20},
+  M:{n:'Krátké ždímání',t:'Jemné a krátké vyždímání pro citlivé věci.',min:5},
+  N:{n:'Vypouštění vody',t:'Jen odčerpá vodu. Hodí se při nutnosti otevřít pračku uprostřed cyklu.',min:3},
+  P:{n:'Vypouštění vody',t:'Odčerpá vodu a buben se zastaví.',min:3}
+};
+const ST={pwr:false,half:false,rinse:false,spin:900,prog:'C',temp:40,running:false,endTime:null,timer:null,dur:0};
+function fa(data,val){const i=data.find(x=>x.v==val);return i?i.d:0}
+function renderLbls(cid,data,type){
+  const c=document.getElementById(cid);c.innerHTML='';
+  data.forEach(item=>{
+    const d=document.createElement('div');d.className='vlbl';d.id=`l-${type}-${item.v}`;
+    d.textContent=item.lbl||item.v;
+    d.style.transform=`rotate(${item.d}deg) translateY(-${R}px) rotate(${-item.d}deg)`;
+    d.onclick=()=>{if(!ST.running)setKnob(type,item.v,item.d);};
+    c.appendChild(d);
+  });
+}
+function setKnob(type,val,angle){
+  ST[type]=val;
+  document.getElementById(`kn-${type}`).style.transform=`rotate(${angle}deg)`;
+  document.querySelectorAll(`[id^="l-${type}-"]`).forEach(e=>e.classList.remove('sel'));
+  const sel=document.getElementById(`l-${type}-${val}`);
+  if(sel)sel.classList.add('sel');
+  analyze();
+}
+function toggleBtn(t){
+  if(ST.running&&t!=='pwr')return;
+  ST[t]=!ST[t];
+  document.getElementById(`btn-${t}`).classList.toggle('on',ST[t]);
+  if(t==='pwr')document.getElementById('led-pwr').classList.toggle('on',ST.pwr);
+  analyze();
+}
+function toggleStart(){
+  if(!ST.pwr){alert('Nejdřív zapni pračku tlačítkem I/O.');return;}
+  ST.running?stopWash(false):startWash();
+}
+function startWash(){
+  ST.running=true;ST.dur=PINFO[ST.prog]?.min||60;ST.endTime=Date.now()+ST.dur*60000;
+  const btn=document.getElementById('startBtn');btn.classList.add('running');
+  btn.innerHTML='<i class="ti ti-player-stop" aria-hidden="true"></i>';
+  document.querySelectorAll('.kbox').forEach(k=>{k.style.opacity='0.5';k.style.pointerEvents='none';});
+  document.getElementById('timer-card').classList.add('active');
+  switchView('info');updTimer();ST.timer=setInterval(updTimer,1000);
+}
+function stopWash(done){
+  if(!done&&!confirm('Zastavit praní?'))return;
+  clearInterval(ST.timer);ST.running=false;ST.endTime=null;
+  const btn=document.getElementById('startBtn');btn.classList.remove('running');
+  btn.innerHTML='<i class="ti ti-player-play" aria-hidden="true"></i>';
+  document.querySelectorAll('.kbox').forEach(k=>{k.style.opacity='1';k.style.pointerEvents='auto';});
+  document.getElementById('timer-card').classList.remove('active');
+  if(done)alert('Hotovo! Prádlo je čerstvé.');
+  analyze();
+}
+function updTimer(){
+  const rem=Math.max(0,ST.endTime-Date.now());
+  const s=Math.ceil(rem/1000);const m=Math.floor(s/60);const sc=s%60;
+  document.getElementById('t-time').textContent=`${m}:${sc.toString().padStart(2,'0')}`;
+  document.getElementById('t-fill').style.width=`${Math.min(100,((ST.dur*60000-(rem))/(ST.dur*60000))*100)}%`;
+  document.getElementById('t-status').textContent=`Pere — program ${ST.prog}`;
+  if(rem<=0){clearInterval(ST.timer);stopWash(true);}
+}
+function analyze(){
+  const dot=document.getElementById('s-dot'),lbl=document.getElementById('s-lbl'),
+        sum=document.getElementById('s-sum'),atitle=document.getElementById('a-title'),
+        abody=document.getElementById('a-body'),warn=document.getElementById('warn-box'),
+        dgrid=document.getElementById('dgrid');
+  if(!ST.pwr){
+    dot.classList.remove('on');lbl.className='s-lbl';lbl.textContent='Vypnuto';
+    sum.textContent='— zapni tlačítkem I/O';atitle.textContent='Pračka je vypnuta';
+    abody.textContent='Stiskni I/O pro zapnutí. Pak klikej na hodnoty kolem budíků, nebo použij Autopilota.';
+    warn.className='warn';dgrid.style.display='none';return;
+  }
+  dot.classList.add('on');lbl.className='s-lbl on';lbl.textContent='Zapnuto';
+  const ts=ST.temp==='cold'?'studená':`${ST.temp} °C`;
+  sum.textContent=`Program ${ST.prog}  ·  ${ts}  ·  ${ST.spin} ot/min`;
+  let wt='';
+  if((ST.temp==80||ST.temp==90)&&!['A','B'].includes(ST.prog))
+    wt=`${ST.temp} °C je vhodných jen pro bílé 100% bavlněné kusy. Na barevné věci nebo syntetiku hrozí poškození.`;
+  else if(['K','J','H'].includes(ST.prog)&&ST.temp!=='cold'&&ST.temp>40)
+    wt=`Na program ${ST.prog} nastav max 30 °C nebo studenou vodu. Při ${ST.temp} °C riskuješ sražení nebo poškození.`;
+  warn.textContent=wt;warn.className=wt?'warn active':'warn';
+  const info=PINFO[ST.prog]||{n:ST.prog,t:'',min:60};
+  atitle.textContent=`Program ${ST.prog} — ${info.n}`;
+  let body=info.t;
+  if(ST.half)body+=' Tlačítko ½ je aktivní — pračka napustí méně vody, vhodné pro malé náplně.';
+  if(ST.rinse)body+=' Zapnuto extra máchání — vhodné pro citlivou pokožku.';
+  if(ST.spin>=850&&['A','B','C','D','H'].includes(ST.prog))body+=` Vysoké otáčky (${ST.spin}) — prádlo vyndáš polosuché, ale víc zmačkané.`;
+  else if(ST.spin<=550&&['A','B','C','D','H'].includes(ST.prog))body+=` Nízké otáčky (${ST.spin}) — prádlo bude vlhčí, ale téměř bez zmačkání.`;
+  abody.textContent=body;
+  dgrid.style.display='grid';
+  document.getElementById('d-prog').textContent=ST.prog;
+  document.getElementById('d-temp').textContent=ST.temp==='cold'?'Studená':`${ST.temp} °C`;
+  document.getElementById('d-spin').textContent=`${ST.spin} ot/min`;
+  const mn=info.min;document.getElementById('d-time').textContent=mn>=60?`${Math.floor(mn/60)} h ${mn%60>0?(mn%60)+' min':''}`.trim():`${mn} min`;
+}
+function switchView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(`v-${id}`).classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(`nb-${id}`).classList.add('active');
+}
+function runAuto(){
+  if(ST.running)return;
+  if(!ST.pwr)toggleBtn('pwr');
+  const color=document.getElementById('sel-color').value;
+  const type=document.getElementById('sel-type').value;
+  let p='C',t=40,s=900;
+  if(type==='shoes'){p='J';t='cold';s=450;}
+  else if(type==='wool'){p='K';t='cold';s=450;}
+  else if(type==='linen'){p='B';s=900;t=60;}
+  else if(type==='heavy'){p='D';s=750;t=color==='dark'?30:40;}
+  else if(type==='dirty'){p='A';s=900;t=color==='white'?60:40;}
+  else{p='C';s=900;if(color==='white')t=60;else if(color==='dark'){t=30;s=850;}}
+  setKnob('prog',p,fa(progD,p));setKnob('temp',t,fa(tempD,t));setKnob('spin',s,fa(spinD,s));
+  const info=PINFO[p];const ts=t==='cold'?'studená':t+' °C';
+  const res=document.getElementById('ap-res');
+  res.innerHTML=`<strong style="color:var(--color-text-primary)">Nastaveno:</strong> Program ${p} — ${info.n} · ${ts} · ${s} ot/min<br><span style="color:var(--color-text-secondary);font-size:12px">${info.t}</span>`;
+  res.classList.add('active');
+  setTimeout(()=>switchView('info'),700);
+}
+function togTip(btn,id){
+  const body=document.getElementById(id);const open=body.classList.contains('open');
+  body.classList.toggle('open',!open);btn.classList.toggle('open',!open);
+}
+renderLbls('lb-spin',spinD,'spin');
+renderLbls('lb-prog',progD,'prog');
+renderLbls('lb-temp',tempD,'temp');
+setKnob('spin',900,fa(spinD,900));
+setKnob('prog','C',fa(progD,'C'));
+setKnob('temp',40,fa(tempD,40));
+analyze();
+</script>
